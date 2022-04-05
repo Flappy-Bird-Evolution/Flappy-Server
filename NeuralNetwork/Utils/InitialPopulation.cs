@@ -5,6 +5,5 @@ using Newtonsoft.Json;
 
 public static class InitialPopulation
 {
-
 }
 

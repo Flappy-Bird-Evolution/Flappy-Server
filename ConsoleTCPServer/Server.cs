@@ -81,7 +81,7 @@ namespace ConsoleTCPServer
 			NetworkUtils.WriteInt(stream, pop.Size());
 			Console.WriteLine($"population size: {pop.Size()}");
 			string[] stringReps = pop.SerializeAll();
-			foreach(NeuralNetwork p in pop.Pop)
+			foreach(NeuralNetwork p in pop.Elements)
 			{
 				NetworkUtils.WriteNN(stream, p);
 			}
@@ -93,7 +93,7 @@ namespace ConsoleTCPServer
 		{
 			NetworkUtils.WriteInt(stream, pop.Size());
 			string[] stringReps = pop.SerializeAll();
-			foreach(NeuralNetwork p in pop.Pop)
+			foreach(NeuralNetwork p in pop.Elements)
 			{
 				NetworkUtils.WriteNN(stream, p);
 			}

@@ -5,12 +5,11 @@ using System.Linq;
 [System.Serializable]
 public class NeuralNetwork : System.IComparable<NeuralNetwork>
 {
-	[JsonProperty] InputNeuron[] inputs;
-	[JsonProperty] HiddenNeuron[] hidden;
-	[JsonProperty] OutputNeuron[] outputs;
-	float networkThershold;
+	[JsonProperty] public InputNeuron[] inputs;
+	[JsonProperty] public HiddenNeuron[] hidden;
+	[JsonProperty] public OutputNeuron[] outputs;
+	private float networkThershold;
 	public float Fitness { get; set; }
-
 	
 	public NeuralNetwork(int i_NumberOfInputs, int i_NumberOfOutputs)
 	{
@@ -18,7 +17,6 @@ public class NeuralNetwork : System.IComparable<NeuralNetwork>
 		outputs = new OutputNeuron[i_NumberOfOutputs];
 
 		int numberOfHiddenNeurons = (i_NumberOfInputs * 2) + 1;
-		//int numberOfHiddenNeurons = (i_NumberOfInputs + i_NumberOfOutputs) / 2;
 		hidden = new HiddenNeuron[numberOfHiddenNeurons];
 		networkThershold = 0.5f;
 		InitNeurons();
@@ -41,8 +39,6 @@ public class NeuralNetwork : System.IComparable<NeuralNetwork>
 		{
 			outputs[i] = new OutputNeuron();
 		}
-
-
 	}
 
 	public void  FeedForward(float[] i_Inputs)
@@ -88,49 +84,6 @@ public class NeuralNetwork : System.IComparable<NeuralNetwork>
 			output.Activate(networkThershold);
 			output.Reset();
 		}
-	}
-	
-	public void MutateNetwork()
-	{
-
-		int randomIndex = Utils.RandomRange(0, hidden.Length);
-		foreach(Neuron n in inputs)
-		{
-			n.MutateWeight(randomIndex);
-		}
-
-		randomIndex = Utils.RandomRange(0, hidden.Length);
-		foreach (Neuron n in inputs)
-		{
-			n.MutateWeight(randomIndex);
-		}
-
-
-
-
-
-		//System.Random rand = new System.Random();
-		//int numberOfNeurons = (int) (inputs.Length + hidden.Length * outputs.Length * 0.05f);
-
-		//List<Neuron> neurons = new List<Neuron>();
-		//for(int i = 0; i < numberOfNeurons/2; i++)
-		//{
-		//	Neuron n = inputs[rand.Next(inputs.Length)];
-		//	if (!neurons.Contains(n))
-		//		neurons.Add(n);
-		//}
-
-		//for(int i = 0; i < hidden.Length; i++)
-		//{
-		//	Neuron n = hidden[rand.Next(hidden.Length)];
-		//	if (!neurons.Contains(n))
-		//		neurons.Add(n);
-		//}
-
-		//foreach(Neuron n in neurons)
-		//{
-		//	n.Mutate();
-		//}
 	}
 
 	public int CompareTo(NeuralNetwork other)

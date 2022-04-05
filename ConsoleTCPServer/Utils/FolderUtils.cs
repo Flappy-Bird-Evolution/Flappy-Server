@@ -31,13 +31,13 @@ namespace FlappyServer.Utils
 
 		public void GenerateMetaData(Population pop)
 		{
-			float highestFitness = pop.GetFittest().Fitness;
+			float highestFitness = 0;//pop.GetFittest().Fitness;
 			float averageFitness = 0;
 
 			string fileName = "Population data.txt";
 			string date = DateTime.Now.ToString();
 
-			foreach (NeuralNetwork n in pop.Pop)
+			foreach (NeuralNetwork n in pop.Elements)
 			{
 				averageFitness += n.Fitness;
 			}
