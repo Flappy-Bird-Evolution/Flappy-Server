@@ -53,10 +53,10 @@ public class Population
 		arrayElements = GeneticOperators.CrossOver(arrayElements);
 		arrayElements = GeneticOperators.Mutation(arrayElements);
 		
-		
 		pop = new List<NeuralNetwork>(arrayElements);
 		ResetFitness();
 	}
+  
 	private int Elitists(List<NeuralNetwork> newGeneration)
 	{
 		pop.Sort();
