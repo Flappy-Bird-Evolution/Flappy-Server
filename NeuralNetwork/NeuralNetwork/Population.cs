@@ -44,11 +44,17 @@ public class Population
 
 	public void ApplyGeneticOperators()
 	{
-		List<NeuralNetwork> newGeneration = new List<NeuralNetwork>();
-		int elitistsAmount = Elitists(newGeneration);
-		newGeneration = Select(newGeneration);
-		newGeneration = Mutate(newGeneration, elitistsAmount);
-		pop = newGeneration;
+		//List<NeuralNetwork> newGeneration = new List<NeuralNetwork>();
+		//int elitistsAmount = Elitists(newGeneration);
+		//newGeneration = Select(newGeneration);
+		//newGeneration = Mutate(newGeneration, elitistsAmount);
+		NeuralNetwork[] arrayElements = pop.ToArray();
+		arrayElements = GeneticOperators.Selection(arrayElements);
+		arrayElements = GeneticOperators.CrossOver(arrayElements);
+		arrayElements = GeneticOperators.Mutation(arrayElements);
+		
+		
+		pop = new List<NeuralNetwork>(arrayElements);
 		ResetFitness();
 	}
 	private int Elitists(List<NeuralNetwork> newGeneration)

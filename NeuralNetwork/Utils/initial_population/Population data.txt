@@ -1,0 +1,4 @@
+Date: 05/04/2022 18:26:47
+Elements in generation: 100
+Highest Fitness: 1
+Average Fitness: 0.04
