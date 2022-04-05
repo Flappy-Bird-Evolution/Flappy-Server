@@ -7,6 +7,15 @@ public abstract class Neuron
 	[JsonProperty] protected float[] outputWeights;
 	protected bool active;
 
+	public Neuron(int nextLayerLength)
+	{
+		outputWeights = new float[nextLayerLength];
+
+		for(int i = 0; i < outputWeights.Length; i++)
+		{
+			outputWeights[i] = Utils.RandomRange(-1f, 1f);
+		}
+	}
 	public virtual void RecieveInput(float i_InputVal)
 	{
 		currentValue += i_InputVal;
@@ -37,7 +46,13 @@ public abstract class Neuron
 	{
 		for (int i = 0; i < outputWeights.Length; i++)
 		{
-			outputWeights[i] += Utils.RandomRange(-3f, 3f);
+			outputWeights[i] += Utils.RandomRange(-10f, 10f);
 		}
+	}
+
+	public void MutateWeight(int index)
+	{
+		outputWeights[index] += Utils.RandomRange(-10f, 10f);
+
 	}
 }

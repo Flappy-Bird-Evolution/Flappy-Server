@@ -17,7 +17,7 @@ namespace ConsoleTCPServer
 
 		private void initPopulation(NetworkStream stream)
 		{
-			Population pop = new Population(0.01f, 100, 5, 1);
+			Population pop = new Population(0.1f, 100, 5, 1);
 			sendInitialResponse(pop, stream);
 		}
 		public void Run()
@@ -80,6 +80,7 @@ namespace ConsoleTCPServer
 		private void sendResponse(Population pop, NetworkStream stream)
 		{
 			NetworkUtils.WriteInt(stream, pop.Size());
+			Console.WriteLine($"population size: {pop.Size()}");
 			string[] stringReps = pop.SerializeAll();
 			foreach(NeuralNetwork p in pop.Pop)
 			{

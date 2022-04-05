@@ -1,9 +1,9 @@
 ﻿public class InputNeuron : Neuron
 {
 
-	public InputNeuron(int i_SizeOfNextLayer)
+	public InputNeuron(int i_SizeOfNextLayer) : base(i_SizeOfNextLayer)
 	{
-		outputWeights = new float[i_SizeOfNextLayer];
+
 	}
 
 }

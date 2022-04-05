@@ -6,7 +6,6 @@ public class Population
 {
 	List<NeuralNetwork> pop;
 	public float mutationRate;
-	float crossoverRate;
 	int m_PopulationSize;
 
 	public List<NeuralNetwork> Pop
@@ -18,7 +17,6 @@ public class Population
 	{
 		mutationRate = i_MutationRate;
 		m_PopulationSize = i_PopulationSize;
-		crossoverRate = 0.5f;
 		initPopulation(i_Inputs, i_Outputs);
 	}
 
@@ -48,8 +46,9 @@ public class Population
 	{
 		List<NeuralNetwork> newGeneration = new List<NeuralNetwork>();
 		int elitistsAmount = Elitists(newGeneration);
-		Select(newGeneration);
-		Mutate(elitistsAmount);
+		newGeneration = Select(newGeneration);
+		newGeneration = Mutate(newGeneration, elitistsAmount);
+		pop = newGeneration;
 		ResetFitness();
 	}
 	private int Elitists(List<NeuralNetwork> newGeneration)
@@ -60,47 +59,33 @@ public class Population
 		return fivePrecent;
 	}
 
-	public void Select(List<NeuralNetwork> newGeneration)
+	public List<NeuralNetwork> Select(List<NeuralNetwork> newGeneration)
 	{
 		for(int i = newGeneration.Count; i < m_PopulationSize; i++)
 		{
 			newGeneration.Add(ThreeWayTournement());
 		}
 
-		pop = newGeneration;
-	}
-
-	public void CrossOver(List<NeuralNetwork> newGeneration)
-	{
-		foreach(NeuralNetwork n in newGeneration)
-		{
-			if(Utils.RandomRange(0,1f) < crossoverRate)
-			{
-
-			}
-		}
-	}
-
-	//private NeuralNetwork findMatch(NeuralNetwork network, List<NeuralNetwork> generation)
-	//{
+		return newGeneration;
 		
-	//}
+	}
 
-	public void Mutate(int elitistsAmount)
+	public List<NeuralNetwork> Mutate(List<NeuralNetwork> newGeneration, int elitistsAmount)
 	{
 		Random rand = new Random();
+		int mutatedCount = 0;
 		for(int i = elitistsAmount; i < pop.Count; i++)
 		{
-			if (rand.NextDouble() < mutationRate)
+			if (rand.NextDouble() <= mutationRate)
 			{
-				pop[i].MutateNetwork(mutationRate);
+				mutatedCount++;
+				pop[i].MutateNetwork();
 			}
 		}
 
-		for(int i = elitistsAmount; i < pop.Count; i++ )
-		{
-			pop[i].MutateNetwork(mutationRate);
-		}
+		Console.WriteLine("mutated count: " + mutatedCount);
+
+		return newGeneration;
 	}
 	private void ResetFitness()
 	{
