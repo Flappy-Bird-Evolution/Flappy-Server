@@ -89,9 +89,27 @@ public class NeuralNetwork : System.IComparable<NeuralNetwork>
 	public NeuralNetwork SelfReplicate()
 	{
 		NeuralNetwork clone = new NeuralNetwork(5,1);
-		clone.inputs = (InputNeuron[]) inputs.Clone();
-		clone.hidden = (HiddenNeuron[]) hidden.Clone();
-		clone.outputs = (OutputNeuron[]) outputs.Clone();
+		List<InputNeuron> clonedInputs = new List<InputNeuron>();
+		foreach(InputNeuron input in inputs)
+		{
+			clonedInputs.Add(input.Clone());
+		}
+
+		List<HiddenNeuron> clonedHiddens = new List<HiddenNeuron>();
+		foreach (HiddenNeuron hidden in hidden)
+		{
+			clonedHiddens.Add(hidden.Clone());
+		}
+
+		List<OutputNeuron> clonedOutputs = new List<OutputNeuron>();
+		foreach (OutputNeuron output in outputs)
+		{
+			clonedOutputs.Add(output.Clone());
+		}
+
+		clone.inputs = clonedInputs.ToArray();
+		clone.hidden = clonedHiddens.ToArray();
+		clone.outputs = clonedOutputs.ToArray();
 		clone.Fitness = Fitness;
 
 		return clone;

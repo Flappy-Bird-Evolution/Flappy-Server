@@ -20,4 +20,9 @@ public class HiddenNeuron: Neuron
 			i_OutputLayer[i].RecieveInput(outputWeights[i] * CurrentValue);
 		}
 	}
+
+	public override HiddenNeuron Clone()
+	{
+		return (HiddenNeuron)base.Clone();
+	}
 }

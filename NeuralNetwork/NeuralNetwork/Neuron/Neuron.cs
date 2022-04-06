@@ -41,4 +41,12 @@ public abstract class Neuron
 			i_NextLayerNeurons[i].RecieveInput(currentValue * outputWeights[i]);
 		}
 	}
+
+	public virtual Neuron Clone()
+	{
+		float[] weights = (float[]) outputWeights.Clone();
+		Neuron n = this.Clone();
+		n.outputWeights = weights;
+		return n;
+	}
 }

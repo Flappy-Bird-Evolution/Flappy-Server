@@ -6,4 +6,10 @@
 
 	}
 
+	public override InputNeuron Clone()
+	{
+		InputNeuron n = (InputNeuron) base.Clone();
+		return n;
+	}
+
 }
