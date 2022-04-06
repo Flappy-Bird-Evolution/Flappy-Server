@@ -86,6 +86,16 @@ public class NeuralNetwork : System.IComparable<NeuralNetwork>
 		}
 	}
 
+	public NeuralNetwork SelfReplicate()
+	{
+		NeuralNetwork clone = new NeuralNetwork(5,1);
+		clone.inputs = (InputNeuron[]) inputs.Clone();
+		clone.hidden = (HiddenNeuron[]) hidden.Clone();
+		clone.outputs = (OutputNeuron[]) outputs.Clone();
+		clone.Fitness = Fitness;
+
+		return clone;
+	}
 	public int CompareTo(NeuralNetwork other)
 	{
 		return (int) (Fitness - other.Fitness);
